@@ -80,6 +80,7 @@
       </form>
 
       <section id="results" class="results hidden" aria-live="polite">
+        <div id="summaryCards" class="summary-cards"></div>
         <section class="card result-hero">
           <div>
             <div class="eyebrow">SYNTHÈSE</div>
@@ -90,7 +91,12 @@
         </section>
 
         <section class="card">
-          <h2>Orientations principales</h2>
+          <h2>Vos mesures</h2>
+          <div class="table-wrap"><table class="measure-table"><thead><tr><th>Paramètre</th><th>État</th><th>Interprétation rapide</th></tr></thead><tbody id="measureSummary"></tbody></table></div>
+        </section>
+
+        <section class="card">
+          <h2>Hypothèses principales</h2>
           <div id="hypotheses"></div>
         </section>
 
@@ -137,7 +143,7 @@
     <section id="screen-references" class="screen">
       <section class="card">
         <h2>Mode d'interprétation</h2>
-        <p>L'outil croise les huit indicateurs et le contexte de terrain. Il recherche des profils concordants, des mesures discordantes et les familles 5M à explorer en priorité.</p>
+        <p>L'outil croise les dix indicateurs et le contexte de terrain. Il recherche des profils concordants, des mesures discordantes et les familles 5M à explorer en priorité.</p>
         <div class="reference-grid">
           <article><strong>Brix urinaire</strong><span>Orientation sur la concentration des urines, à rapprocher de la densité et du contexte d'abreuvement.</span></article>
           <article><strong>Densité urinaire</strong><span>Indicateur de concentration, à interpréter avec l'heure, la température, l'accès à l'eau et le lot.</span></article>
@@ -147,6 +153,8 @@
           <article><strong>Redox des bouses</strong><span>Mesure d'orientation de la dynamique digestive, à confirmer par les observations zootechniques.</span></article>
           <article><strong>Glycémie sanguine</strong><span>Indicateur ponctuel de disponibilité énergétique. À interpréter selon l'espèce, le stade physiologique, le stress, le délai de lecture et la prise alimentaire.</span></article>
           <article><strong>BOH sanguin</strong><span>Le β-hydroxybutyrate renseigne sur la mobilisation des réserves et le risque de déficit énergétique. Une valeur haute doit être rapprochée de la glycémie, de l'état corporel, de l'ingestion et du stade physiologique.</span></article>
+                  <article><strong>Urée sanguine</strong><span>À croiser avec l’énergie, l’azote de la ration, l’ingestion, l’hydratation et la fonction rénale.</span></article>
+          <article><strong>pH sanguin</strong><span>Indicateur central de l’équilibre acido-basique, nécessitant un prélèvement adapté et une confirmation si anormal.</span></article>
         </div>
       </section>
     </section>
