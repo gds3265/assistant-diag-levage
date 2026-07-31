@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f4c5c" />
+  <meta name="description" content="Assistant mobile d'aide à l'analyse d'élevage selon la méthode 5M Vet." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Assistant 5M Vet</title>
+</head>
+<body>
+  <header class="app-header">
+    <div>
+      <div class="eyebrow">AIDE À L’ANALYSE D’ÉLEVAGE</div>
+      <h1>Assistant 5M Vet</h1>
+    </div>
+    <button id="installBtn" class="ghost hidden" type="button">Installer</button>
+  </header>
+
+  <nav class="tabs" aria-label="Navigation principale">
+    <button class="tab active" data-screen="analyse">Nouvelle analyse</button>
+    <button class="tab" data-screen="history">Historique</button>
+    <button class="tab" data-screen="references">Références</button>
+  </nav>
+
+  <main>
+    <section id="screen-analyse" class="screen active">
+      <form id="analysisForm">
+        <section class="card">
+          <h2>1. Contexte de la visite</h2>
+          <div class="grid two">
+            <label>Élevage
+              <input id="farm" name="farm" placeholder="Nom ou numéro de cheptel" />
+            </label>
+            <label>Date
+              <input id="visitDate" name="visitDate" type="date" required />
+            </label>
+            <label>Espèce
+              <select id="species" name="species">
+                <option value="Bovins">Bovins</option>
+                <option value="Ovins">Ovins</option>
+                <option value="Caprins">Caprins</option>
+              </select>
+            </label>
+            <label>Catégorie
+              <input id="category" name="category" placeholder="Ex. vaches en lactation" />
+            </label>
+            <label>Nombre d'animaux mesurés
+              <input id="animalCount" name="animalCount" type="number" min="1" inputmode="numeric" placeholder="Ex. 8" />
+            </label>
+            <label>Motif
+              <input id="reason" name="reason" placeholder="Ex. baisse de production" />
+            </label>
+          </div>
+        </section>
+
+        <section class="card">
+          <h2>2. Mesures observées</h2>
+          <p class="muted">Sélectionnez la tendance générale du lot. « Non mesuré » n'entre pas dans l'analyse.</p>
+          <div id="measureGrid" class="measure-grid"></div>
+        </section>
+
+        <section class="card">
+          <h2>3. Contexte associé</h2>
+          <div id="contextGrid" class="chips"></div>
+          <label class="full">Commentaires terrain
+            <textarea id="notes" rows="4" placeholder="Observations, ration, accès à l'eau, comportement, conditions météo..."></textarea>
+          </label>
+        </section>
+
+        <div class="actions sticky-actions">
+          <button class="primary" type="submit">Analyser</button>
+          <button class="secondary" type="button" id="resetBtn">Réinitialiser</button>
+        </div>
+      </form>
+
+      <section id="results" class="results hidden" aria-live="polite">
+        <section class="card result-hero">
+          <div>
+            <div class="eyebrow">SYNTHÈSE</div>
+            <h2 id="resultTitle">Résultat</h2>
+            <p id="resultSummary"></p>
+          </div>
+          <div id="coherenceBadge" class="badge">—</div>
+        </section>
+
+        <section class="card">
+          <h2>Orientations principales</h2>
+          <div id="hypotheses"></div>
+        </section>
+
+        <section class="card">
+          <h2>Lecture 5M Vet</h2>
+          <div id="fiveM"></div>
+        </section>
+
+        <section class="card">
+          <h2>Contrôles complémentaires suggérés</h2>
+          <div id="checks"></div>
+        </section>
+
+        <section class="card">
+          <h2>Plan d'action terrain</h2>
+          <div id="actionsPlan"></div>
+        </section>
+
+        <section class="card warning">
+          <strong>Important</strong>
+          <p>Cette application fournit une orientation à partir de tendances déclarées. Elle ne pose pas de diagnostic et ne remplace ni l'examen clinique, ni l'analyse de la ration, ni l'avis du vétérinaire ou du conseiller.</p>
+        </section>
+
+        <div class="actions">
+          <button id="saveBtn" class="primary" type="button">Enregistrer cette visite</button>
+          <button id="printBtn" class="secondary" type="button">Imprimer / PDF</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="screen-history" class="screen">
+      <section class="card">
+        <div class="section-head">
+          <div>
+            <h2>Historique des visites</h2>
+            <p class="muted">Les données sont conservées uniquement sur cet appareil.</p>
+          </div>
+          <button id="clearHistoryBtn" class="danger ghost" type="button">Tout supprimer</button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </section>
+
+    <section id="screen-references" class="screen">
+      <section class="card">
+        <h2>Mode d'interprétation</h2>
+        <p>L'outil croise les six indicateurs et le contexte de terrain. Il recherche des profils concordants, des mesures discordantes et les familles 5M à explorer en priorité.</p>
+        <div class="reference-grid">
+          <article><strong>Brix urinaire</strong><span>Orientation sur la concentration des urines, à rapprocher de la densité et du contexte d'abreuvement.</span></article>
+          <article><strong>Densité urinaire</strong><span>Indicateur de concentration, à interpréter avec l'heure, la température, l'accès à l'eau et le lot.</span></article>
+          <article><strong>pH urinaire</strong><span>À rapprocher de la catégorie animale, de la ration, du statut physiologique et des objectifs alimentaires.</span></article>
+          <article><strong>Redox urinaire</strong><span>Mesure d'orientation sensible au prélèvement, au délai de lecture et aux conditions de mesure.</span></article>
+          <article><strong>pH des bouses</strong><span>À croiser avec l'aspect des bouses, les particules, la ration, le tri et les transitions alimentaires.</span></article>
+          <article><strong>Redox des bouses</strong><span>Mesure d'orientation de la dynamique digestive, à confirmer par les observations zootechniques.</span></article>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <template id="historyTemplate">
+    <article class="history-item">
+      <div>
+        <strong class="h-farm"></strong>
+        <div class="muted h-meta"></div>
+        <div class="h-title"></div>
+      </div>
+      <div class="history-actions">
+        <button class="ghost h-open" type="button">Ouvrir</button>
+        <button class="ghost danger h-delete" type="button">Supprimer</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
