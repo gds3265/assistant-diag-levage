@@ -1,17 +1,13 @@
-ASSISTANT 5M VET — VERSION 1
+ASSISTANT GDS 32 65 — VERSION 2
 
-Contenu :
-- index.html : application
-- styles.css : mise en page mobile
-- app.js : moteur d'analyse, historique local et impression
-- manifest.webmanifest + sw.js : installation PWA et fonctionnement hors connexion
+Application web mobile installable pour une première analyse de terrain selon la méthode 5M Vet.
 
-MISE EN LIGNE RAPIDE
-1. Décompresser le ZIP.
-2. Déposer tous les fichiers à la racine d'un dépôt GitHub ou sur Netlify.
-3. Ouvrir l'adresse HTTPS sur le téléphone.
-4. Sur Android : utiliser le bouton Installer ou le menu Chrome.
-5. Sur iPhone : Safari > Partager > Sur l'écran d'accueil.
+Nouveautés V2 :
+- nouveau nom Assistant GDS 32 65 ;
+- identité visuelle GDS Gers & Hautes-Pyrénées ;
+- ajout glycémie et BOH sanguins ;
+- explication détaillée de chaque orientation ;
+- détail ouvrable pour chaque axe des 5M ;
+- historique local et impression PDF.
 
-IMPORTANT
-Les règles de cette première version sont des orientations prudentes et non des diagnostics. Elles devront être relues et enrichies avec vos références métier, vos catégories animales et vos seuils validés.
+Important : outil d’orientation, sans valeur diagnostique.

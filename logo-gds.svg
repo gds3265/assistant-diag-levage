@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" role="img" aria-label="GDS Gers Hautes-Pyrénées">
+  <rect width="520" height="150" rx="18" fill="white"/>
+  <g transform="translate(18 15)">
+    <path d="M20 70 C55 12,130 2,178 42" fill="none" stroke="#6e2b8f" stroke-width="13" stroke-linecap="round"/>
+    <path d="M25 88 C80 130,148 120,187 66" fill="none" stroke="#2f80c9" stroke-width="13" stroke-linecap="round"/>
+    <path d="M55 20 C100 8,150 30,174 65" fill="none" stroke="#72ae44" stroke-width="11" stroke-linecap="round"/>
+    <path d="M88 11 L125 62 L58 55 Z" fill="#8f969c" opacity=".95"/>
+    <text x="205" y="63" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="800" fill="#1c2328">GDS</text>
+    <text x="207" y="91" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#1c2328">Gers &amp; Hautes-Pyrénées</text>
+    <text x="207" y="117" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" fill="#6e2b8f">L’action sanitaire ensemble</text>
+  </g>
+</svg>

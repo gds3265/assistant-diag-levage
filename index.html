@@ -4,17 +4,20 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0f4c5c" />
-  <meta name="description" content="Assistant mobile d'aide à l'analyse d'élevage selon la méthode 5M Vet." />
+  <meta name="description" content="Assistant GDS 32 65 d’aide à l’analyse d’élevage selon la méthode 5M Vet." />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="icon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="styles.css" />
-  <title>Assistant 5M Vet</title>
+  <title>Assistant GDS 32 65</title>
 </head>
 <body>
   <header class="app-header">
-    <div>
-      <div class="eyebrow">AIDE À L’ANALYSE D’ÉLEVAGE</div>
-      <h1>Assistant 5M Vet</h1>
+    <div class="brand-wrap">
+      <img class="gds-logo" src="logo-gds.svg" alt="GDS Gers et Hautes-Pyrénées">
+      <div>
+        <div class="eyebrow">AIDE À L’ANALYSE D’ÉLEVAGE</div>
+        <h1>Assistant GDS 32 65</h1>
+      </div>
     </div>
     <button id="installBtn" class="ghost hidden" type="button">Installer</button>
   </header>
@@ -134,7 +137,7 @@
     <section id="screen-references" class="screen">
       <section class="card">
         <h2>Mode d'interprétation</h2>
-        <p>L'outil croise les six indicateurs et le contexte de terrain. Il recherche des profils concordants, des mesures discordantes et les familles 5M à explorer en priorité.</p>
+        <p>L'outil croise les huit indicateurs et le contexte de terrain. Il recherche des profils concordants, des mesures discordantes et les familles 5M à explorer en priorité.</p>
         <div class="reference-grid">
           <article><strong>Brix urinaire</strong><span>Orientation sur la concentration des urines, à rapprocher de la densité et du contexte d'abreuvement.</span></article>
           <article><strong>Densité urinaire</strong><span>Indicateur de concentration, à interpréter avec l'heure, la température, l'accès à l'eau et le lot.</span></article>
@@ -142,6 +145,8 @@
           <article><strong>Redox urinaire</strong><span>Mesure d'orientation sensible au prélèvement, au délai de lecture et aux conditions de mesure.</span></article>
           <article><strong>pH des bouses</strong><span>À croiser avec l'aspect des bouses, les particules, la ration, le tri et les transitions alimentaires.</span></article>
           <article><strong>Redox des bouses</strong><span>Mesure d'orientation de la dynamique digestive, à confirmer par les observations zootechniques.</span></article>
+          <article><strong>Glycémie sanguine</strong><span>Indicateur ponctuel de disponibilité énergétique. À interpréter selon l'espèce, le stade physiologique, le stress, le délai de lecture et la prise alimentaire.</span></article>
+          <article><strong>BOH sanguin</strong><span>Le β-hydroxybutyrate renseigne sur la mobilisation des réserves et le risque de déficit énergétique. Une valeur haute doit être rapprochée de la glycémie, de l'état corporel, de l'ingestion et du stade physiologique.</span></article>
         </div>
       </section>
     </section>
