@@ -1,21 +1,13 @@
-Assistant GDS 32-65 — Saisie ferme v4.2
+ASSISTANT GDS 32 65 — VERSION 2
 
-Corrections :
-- numéro de version visible dans l’application ;
-- « Examen clinique » remplacé par « Observations physiques » ;
-- Cardiaque, Respiratoire, Nombril et Thyroïde / larynx uniquement pour les catégories veaux ;
-- module Bâtiment conservé.
+Application web mobile installable pour une première analyse de terrain selon la méthode 5M Vet.
 
-ASSISTANT GDS 32-65 — SAISIE FERME V4
+Nouveautés V2 :
+- nouveau nom Assistant GDS 32 65 ;
+- identité visuelle GDS Gers & Hautes-Pyrénées ;
+- ajout glycémie et BOH sanguins ;
+- explication détaillée de chaque orientation ;
+- détail ouvrable pour chaque axe des 5M ;
+- historique local et impression PDF.
 
-Nouveautés :
-- module complet d’analyse du bâtiment ;
-- plan tactile enregistré hors connexion ;
-- orientation, dimensions, aération, ambiance et luminosité ;
-- types, nombres, capacités, débits et état des abreuvoirs ;
-- mesures électriques sur abreuvoirs, barrières, cornadis et autres équipements ;
-- questionnaire environnement et bien-être à choix multiples ;
-- export CSV spécifique du bâtiment ;
-- photos du plan et des équipements.
-
-Déploiement : déposer tous les fichiers sur GitHub Pages ou Netlify.
+Important : outil d’orientation, sans valeur diagnostique.

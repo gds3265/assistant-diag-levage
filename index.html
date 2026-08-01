@@ -1,238 +1,179 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#155e45">
-<title>Assistant GDS 32-65 — Saisie ferme v4.2</title>
-<link rel="manifest" href="manifest.webmanifest">
-<style>
-:root{--green:#176b4f;--green2:#e8f5ef;--ink:#17202a;--muted:#667085;--line:#d8dee6;--bg:#f3f6f4;--urine:#f5c842;--urine-bg:#fff8d8;--sang:#c83b3b;--sang-bg:#fdeaea;--bouse:#8a5a35;--bouse-bg:#f3e7dc;--clinique:#3f8d5a;--clinique-bg:#eaf5ed;--lait:#3a79b8;--lait-bg:#eaf3fb;--colo:#8156a7;--colo-bg:#f3ecf8;--eau:#2e92a4;--eau-bg:#e7f6f8;--shadow:0 3px 14px #17352a12}
-*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--ink)}
-header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,#10563f,#24815f);color:#fff;padding:13px 14px 11px;box-shadow:0 2px 9px #0003}header h1{font-size:20px;margin:0}header p{font-size:12px;margin:3px 0 0;opacity:.9}.wrap{max-width:1180px;margin:auto;padding:12px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:12px;box-shadow:var(--shadow)}
-nav{display:flex;gap:7px;overflow:auto;padding-bottom:2px}nav button{white-space:nowrap;border:1px solid #d0d7df;background:#fff;padding:10px 12px;border-radius:11px;font-weight:750;color:#344054}nav button.active{background:var(--green);color:#fff;border-color:var(--green)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.full{grid-column:1/-1}.field label{display:block;font-size:12px;font-weight:750;color:#344054;margin:0 0 5px}.field small{display:block;font-size:11px;color:var(--muted);margin-top:3px}input,select,textarea{width:100%;border:1px solid #cbd3dc;border-radius:10px;padding:11px;background:#fff;font:inherit}input:focus,select:focus,textarea:focus{outline:2px solid #8bcdb3;border-color:var(--green)}textarea{min-height:72px;resize:vertical}.title{font-size:17px;font-weight:850;margin:0 0 11px}.subtitle{font-size:14px;font-weight:800;margin:15px 0 8px;color:#344054}.muted{color:var(--muted);font-size:12px}.hidden{display:none!important}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.btn{border:0;border-radius:11px;padding:11px 14px;font-weight:800;background:var(--green);color:white}.btn.secondary{background:#fff;color:#344054;border:1px solid #cbd3dc}.btn.danger{background:#b42318}.btn.small{padding:7px 9px;font-size:12px}.btn.block{width:100%}
-.mode-grid,.family-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.mode,.family{border:1px solid #d5dce4;background:#fff;border-radius:14px;padding:13px 8px;text-align:center;font-weight:800;min-height:74px}.mode.active{outline:3px solid #8bcdb3;border-color:var(--green)}.family{font-size:13px}.family strong{display:block;font-size:22px;margin-bottom:3px}.family[data-family="urines"]{background:var(--urine-bg);border-color:#efd36d}.family[data-family="sang"]{background:var(--sang-bg);border-color:#e9a2a2}.family[data-family="bouses"]{background:var(--bouse-bg);border-color:#c9a588}.family[data-family="clinique"]{background:var(--clinique-bg);border-color:#a5ceb0}.family[data-family="lait"]{background:var(--lait-bg);border-color:#a8c9e6}.family[data-family="colostrum"]{background:var(--colo-bg);border-color:#c9acd9}.family[data-family="eau"]{background:var(--eau-bg);border-color:#9ed0d7}.family.active{outline:3px solid #344054}
-.family-banner{border-radius:14px;padding:12px 14px;margin:10px 0;font-weight:900;display:flex;align-items:center;gap:8px}.family-banner.urines{background:var(--urine-bg);border-left:8px solid var(--urine)}.family-banner.sang{background:var(--sang-bg);border-left:8px solid var(--sang)}.family-banner.bouses{background:var(--bouse-bg);border-left:8px solid var(--bouse)}.family-banner.clinique{background:var(--clinique-bg);border-left:8px solid var(--clinique)}.family-banner.lait{background:var(--lait-bg);border-left:8px solid var(--lait)}.family-banner.colostrum{background:var(--colo-bg);border-left:8px solid var(--colo)}.family-banner.eau{background:var(--eau-bg);border-left:8px solid var(--eau)}
-.chips{display:flex;gap:7px;flex-wrap:wrap}.chip{border:1px solid #cbd3dc;background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;user-select:none}.chip.selected{background:#344054;color:#fff;border-color:#344054}.chip input{display:none}.choice-box{border:1px solid #dce2e8;border-radius:13px;padding:11px;background:#fbfcfc}.choice-box label.head{font-size:13px;font-weight:850;display:block;margin-bottom:8px}.help{background:#f8fafc;border:1px solid #e2e8f0;border-radius:11px;padding:10px;font-size:12px;color:#475467}
-.table-wrap{overflow:auto;border:1px solid #d8dee6;border-radius:13px;background:#fff}.entry-table{border-collapse:collapse;min-width:900px;width:100%}.entry-table th{position:sticky;top:0;background:#f0f4f2;z-index:2;font-size:11px;text-align:left;padding:8px;border-bottom:1px solid #ccd5dd}.entry-table td{padding:5px;border-bottom:1px solid #edf0f3;vertical-align:top}.entry-table input,.entry-table select{min-width:100px;padding:8px;border-radius:8px}.entry-table .animal{min-width:140px}.entry-table .multi-btn{min-width:150px;text-align:left;background:#fff;border:1px solid #cbd3dc;border-radius:8px;padding:8px}.row-tools{white-space:nowrap}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px}.kpi strong{display:block;font-size:23px}.kpi span{font-size:11px;color:var(--muted)}.progress{height:10px;background:#e5e7eb;border-radius:999px;overflow:hidden}.progress i{display:block;height:100%;background:var(--green)}
-.record{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #edf0f3;padding:10px 2px}.record:last-child{border:0}.record small{display:block;color:var(--muted);margin-top:3px}.tag{display:inline-block;padding:3px 7px;border-radius:999px;font-size:10px;font-weight:800;background:#eef2f6;margin-right:4px}.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.photo{border:1px solid #d7dee5;border-radius:13px;overflow:hidden;background:#fff}.photo img{width:100%;aspect-ratio:1.25;object-fit:cover;display:block}.photo .meta{padding:8px;font-size:11px}.photo .meta strong{display:block;font-size:12px}.empty{text-align:center;padding:28px 12px;color:var(--muted)}
-.modal{position:fixed;inset:0;background:#0008;z-index:50;display:flex;align-items:flex-end;justify-content:center}.modal-panel{background:#fff;width:min(760px,100%);max-height:88vh;overflow:auto;border-radius:18px 18px 0 0;padding:15px}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.modal-head h3{margin:0}.close{border:0;background:#eef2f6;border-radius:999px;width:34px;height:34px;font-size:18px}
-@media(max-width:720px){.grid,.grid3{grid-template-columns:1fr}.mode-grid,.family-grid{grid-template-columns:repeat(2,1fr)}.kpis{grid-template-columns:repeat(2,1fr)}.photo-grid{grid-template-columns:repeat(2,1fr)}.wrap{padding:9px}.card{padding:12px}.mode{min-height:68px}}
-@media print{header,nav,.no-print{display:none!important}.card{box-shadow:none;break-inside:avoid}.wrap{max-width:none}.tabpage{display:block!important}}
-
-:root{--bat:#68737f;--bat-bg:#eef1f4}
-.family[data-family="batiment"]{background:var(--bat-bg);border-color:#b8c0c8}.family-banner.batiment{background:var(--bat-bg);border-left:8px solid var(--bat)}
-.section-head{display:flex;align-items:center;gap:9px;margin:4px 0 12px}.section-head .ico{font-size:25px}.question-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.question{border:1px solid #dbe1e7;border-radius:13px;padding:11px;background:#fff}.question>label{font-size:13px;font-weight:850;display:block;margin-bottom:8px}.question .chips{gap:5px}.question .chip{font-size:12px;padding:7px 10px}
-.building-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.building-nav button{border:1px solid #cbd3dc;border-radius:12px;background:#fff;padding:10px 6px;font-weight:800}.building-nav button.active{background:#4b5563;color:#fff}.building-pane{margin-top:12px}.plan-tools{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:9px}.plan-wrap{position:relative;border:2px solid #aeb7c0;border-radius:14px;overflow:hidden;background-color:#fff;background-image:linear-gradient(#dfe4e8 1px,transparent 1px),linear-gradient(90deg,#dfe4e8 1px,transparent 1px);background-size:20px 20px}.plan-wrap canvas{display:block;width:100%;height:420px;touch-action:none}.compass{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.compass .chip{text-align:center}.water-card,.electric-row{border:1px solid #d9e0e6;border-radius:13px;padding:11px;margin-bottom:9px;background:#fbfcfd}.water-card-head{display:flex;justify-content:space-between;align-items:center;gap:8px}.water-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:9px}.electric-grid{display:grid;grid-template-columns:1.4fr .8fr .8fr 1.5fr auto;gap:8px;align-items:end}.statusbar{padding:9px 11px;border-radius:10px;background:#f2f4f7;font-size:12px;margin-top:8px}.building-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.building-summary .kpi{background:var(--bat-bg)}
-@media(max-width:720px){.question-grid{grid-template-columns:1fr}.building-nav{grid-template-columns:repeat(2,1fr)}.water-grid{grid-template-columns:repeat(2,1fr)}.electric-grid{grid-template-columns:1fr 1fr}.electric-grid .full-mobile{grid-column:1/-1}.plan-wrap canvas{height:340px}.building-summary{grid-template-columns:1fr}}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0f4c5c" />
+  <meta name="description" content="Assistant GDS 32 65 d’aide à l’analyse d’élevage selon la méthode 5M Vet." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Assistant GDS 32 65</title>
 </head>
 <body>
-<header><h1>Assistant GDS 32-65 <span style="font-size:12px;font-weight:800;opacity:.9">v4.2</span></h1><p>Saisie des mesures en ferme · fonctionnement hors connexion</p></header>
-<div class="wrap">
-<div class="card no-print"><nav>
-<button class="active" data-tab="dashboard">🏠 Visite</button><button data-tab="saisie">✍️ Saisie</button><button data-tab="donnees">📋 Données <span id="recordCountTab"></span></button><button data-tab="batiment">🏠 Bâtiment</button><button data-tab="photos">📷 Photos <span id="photoCountTab"></span></button><button data-tab="export">📤 Export</button>
-</nav></div>
+  <header class="app-header">
+    <div class="brand-wrap">
+      <img class="gds-logo" src="logo-gds.svg" alt="GDS Gers et Hautes-Pyrénées">
+      <div>
+        <div class="eyebrow">AIDE À L’ANALYSE D’ÉLEVAGE</div>
+        <h1>Assistant GDS 32 65</h1>
+      </div>
+    </div>
+    <button id="installBtn" class="ghost hidden" type="button">Installer</button>
+  </header>
 
-<section id="dashboard" class="tabpage">
-<div class="card"><h2 class="title">Informations de la visite</h2><div class="grid3">
-<div class="field"><label>Exploitation</label><input id="farm" placeholder="Nom de l'exploitation"></div><div class="field"><label>Éleveur</label><input id="farmer" placeholder="Nom de l'éleveur"></div><div class="field"><label>Commune</label><input id="town"></div>
-<div class="field"><label>Date</label><input id="visitDate" type="date"></div><div class="field"><label>Intervenant</label><input id="observer"></div><div class="field"><label>Espèce</label><select id="species"><option>Bovin</option><option>Ovin</option></select></div>
-<div class="field"><label>Type de visite</label><select id="visitType"><option>Bilan 5MVet</option><option>Transition</option><option>Acidose</option><option>Cétose</option><option>Eau</option><option>Suivi</option><option>Autre</option></select></div><div class="field"><label>Nombre d'animaux prévu</label><input id="planned" type="number" min="0" inputmode="numeric"></div><div class="field"><label>Lot principal</label><input id="mainLot" placeholder="Ex. Préparation vêlage"></div>
-</div><div class="actions"><button class="btn" id="saveVisit">Enregistrer la visite</button></div></div>
-<div class="kpis"><div class="kpi"><strong id="kpiRecords">0</strong><span>saisies enregistrées</span></div><div class="kpi"><strong id="kpiAnimals">0</strong><span>animaux distincts</span></div><div class="kpi"><strong id="kpiPhotos">0</strong><span>photos</span></div><div class="kpi"><strong id="kpiProgress">0 %</strong><span>progression estimée</span></div></div>
-<div class="card"><h2 class="title">Progression par famille</h2><div id="familyProgress"></div></div>
-</section>
+  <nav class="tabs" aria-label="Navigation principale">
+    <button class="tab active" data-screen="analyse">Nouvelle analyse</button>
+    <button class="tab" data-screen="history">Historique</button>
+    <button class="tab" data-screen="references">Références</button>
+  </nav>
 
-<section id="saisie" class="tabpage hidden">
-<div class="card no-print"><h2 class="title">Mode de saisie</h2><div class="mode-grid"><button class="mode active" data-mode="individual">🐄<br>Fiche complète</button><button class="mode" data-mode="series">🧪<br>Grille par mesure</button><button class="mode" data-mode="category">📊<br>Grille par catégorie</button></div></div>
-<div class="card no-print"><h2 class="title">Famille</h2><div class="family-grid" id="familyButtons"></div></div>
-<div id="individualPanel" class="card"><div id="familyBanner"></div><form id="individualForm"><div class="grid3">
-<div class="field"><label>N° animal / repère</label><input id="animalId" autocomplete="off"></div><div class="field"><label>Catégorie</label><select id="category"></select></div><div class="field"><label>Lot</label><input id="lot"></div><div class="field"><label>Date de mesure</label><input id="measureDate" type="date"></div><div class="field"><label>Âge</label><input id="age"></div><div class="field"><label>Rang</label><input id="rank"></div>
-</div><div id="physiology"></div><div id="individualFields"></div><div class="field full"><label>Observations générales</label><textarea id="notes"></textarea></div><div class="actions"><button class="btn" type="submit">Enregistrer</button><button class="btn secondary" type="button" id="saveNext">Enregistrer et suivant</button><button class="btn secondary" type="button" id="resetIndividual">Effacer</button></div></form></div>
-<div id="gridPanel" class="card hidden"><div id="gridFamilyBanner"></div><div class="grid no-print"><div class="field"><label>Catégorie commune</label><select id="gridCategory"></select></div><div class="field"><label>Date commune</label><input id="gridDate" type="date"></div><div class="field"><label>Lot commun</label><input id="gridLot"></div><div class="field"><label>Nombre de lignes à ajouter</label><input id="rowsToAdd" type="number" min="1" value="5"></div></div><div class="actions no-print"><button class="btn secondary" id="addRows">Ajouter des lignes</button><button class="btn secondary" id="applyCommon">Appliquer catégorie/date/lot</button></div><div class="table-wrap"><table class="entry-table"><thead id="gridHead"></thead><tbody id="gridBody"></tbody></table></div><div class="actions no-print"><button class="btn" id="saveGrid">Enregistrer la grille</button><button class="btn secondary" id="clearGrid">Vider la grille</button></div></div>
-</section>
+  <main>
+    <section id="screen-analyse" class="screen active">
+      <form id="analysisForm">
+        <section class="card">
+          <h2>1. Contexte de la visite</h2>
+          <div class="grid two">
+            <label>Élevage
+              <input id="farm" name="farm" placeholder="Nom ou numéro de cheptel" />
+            </label>
+            <label>Date
+              <input id="visitDate" name="visitDate" type="date" required />
+            </label>
+            <label>Espèce
+              <select id="species" name="species">
+                <option value="Bovins">Bovins</option>
+                <option value="Ovins">Ovins</option>
+                <option value="Caprins">Caprins</option>
+              </select>
+            </label>
+            <label>Catégorie
+              <input id="category" name="category" placeholder="Ex. vaches en lactation" />
+            </label>
+            <label>Nombre d'animaux mesurés
+              <input id="animalCount" name="animalCount" type="number" min="1" inputmode="numeric" placeholder="Ex. 8" />
+            </label>
+            <label>Motif
+              <input id="reason" name="reason" placeholder="Ex. baisse de production" />
+            </label>
+          </div>
+        </section>
 
-<section id="donnees" class="tabpage hidden"><div class="card"><div class="grid no-print"><div class="field"><label>Filtrer par famille</label><select id="filterFamily"><option value="">Toutes</option></select></div><div class="field"><label>Rechercher un animal</label><input id="filterAnimal" placeholder="Numéro ou repère"></div></div><div id="records"></div></div></section>
+        <section class="card">
+          <h2>2. Mesures observées</h2>
+          <p class="muted">Sélectionnez la tendance générale du lot. « Non mesuré » n'entre pas dans l'analyse.</p>
+          <div id="measureGrid" class="measure-grid"></div>
+        </section>
 
+        <section class="card">
+          <h2>3. Contexte associé</h2>
+          <div id="contextGrid" class="chips"></div>
+          <label class="full">Commentaires terrain
+            <textarea id="notes" rows="4" placeholder="Observations, ration, accès à l'eau, comportement, conditions météo..."></textarea>
+          </label>
+        </section>
 
-<section id="batiment" class="tabpage hidden">
-<div class="card no-print"><div class="section-head"><span class="ico">🏠</span><div><h2 class="title" style="margin:0">Analyse du bâtiment</h2><div class="muted">Plan, abreuvement, ventilation, équipements, sécurité électrique et questionnaire environnement/bien-être.</div></div></div>
-<div class="building-nav"><button class="active" data-building-pane="plan">🗺️ Plan</button><button data-building-pane="structure">🏗️ Structure</button><button data-building-pane="water">💧 Abreuvement</button><button data-building-pane="questionnaire">✅ Questionnaire</button></div></div>
+        <div class="actions sticky-actions">
+          <button class="primary" type="submit">Analyser</button>
+          <button class="secondary" type="button" id="resetBtn">Réinitialiser</button>
+        </div>
+      </form>
 
-<div id="building-plan" class="card building-pane"><h3 class="title">Plan simplifié</h3><div class="help">Dessinez au doigt ou à la souris. Utilisez les couleurs pour repérer les zones, puis ajoutez une légende dans le commentaire.</div>
-<div class="plan-tools no-print"><button class="btn small" data-plan-color="#1f2937">Trait noir</button><button class="btn small secondary" data-plan-color="#2563eb">Eau</button><button class="btn small secondary" data-plan-color="#16a34a">Aire de vie</button><button class="btn small secondary" data-plan-color="#dc2626">Danger / courant</button><button class="btn small secondary" id="planEraser">Gomme</button><button class="btn small danger" id="clearPlan">Effacer le plan</button></div>
-<div class="plan-wrap"><canvas id="buildingCanvas" width="1100" height="520"></canvas></div>
-<div class="grid" style="margin-top:10px"><div class="field"><label>Orientation de la façade principale</label><select id="buildingOrientation"><option></option><option>Nord</option><option>Nord-Est</option><option>Est</option><option>Sud-Est</option><option>Sud</option><option>Sud-Ouest</option><option>Ouest</option><option>Nord-Ouest</option></select></div><div class="field"><label>Légende / description du plan</label><textarea id="planLegend" placeholder="Ex. aire paillée au sud, 3 abreuvoirs côté est, entrée d'air nord..."></textarea></div></div>
-<div class="actions no-print"><button class="btn" id="saveBuildingPlan">Enregistrer le plan</button><button class="btn secondary" id="planToPhoto">Ajouter le plan aux photos</button></div></div>
+      <section id="results" class="results hidden" aria-live="polite">
+        <div id="summaryCards" class="summary-cards"></div>
+        <section class="card result-hero">
+          <div>
+            <div class="eyebrow">SYNTHÈSE</div>
+            <h2 id="resultTitle">Résultat</h2>
+            <p id="resultSummary"></p>
+          </div>
+          <div id="coherenceBadge" class="badge">—</div>
+        </section>
 
-<div id="building-structure" class="card building-pane hidden"><h3 class="title">Structure, orientation et ambiance</h3><div class="grid3">
-<div class="field"><label>Type de bâtiment</label><select data-building="buildingType"><option></option><option>Stabulation libre</option><option>Stabulation entravée</option><option>Aire paillée</option><option>Logettes</option><option>Nurserie</option><option>Bergerie</option><option>Tunnel</option><option>Semi-ouvert</option><option>Autre</option></select></div>
-<div class="field"><label>Année / ancienneté</label><input data-building="buildingAge"></div><div class="field"><label>Surface approximative (m²)</label><input data-building="surface" type="number" inputmode="decimal"></div>
-<div class="field"><label>Nombre d'animaux présents</label><input data-building="animalsPresent" type="number" inputmode="numeric"></div><div class="field"><label>Longueur (m)</label><input data-building="length" type="number" inputmode="decimal"></div><div class="field"><label>Largeur (m)</label><input data-building="width" type="number" inputmode="decimal"></div>
-<div class="field"><label>Type d'aération</label><select data-building="ventilationType"><option></option><option>Naturelle</option><option>Mécanique</option><option>Mixte</option><option>Aucune identifiée</option></select></div><div class="field"><label>Ouvertures / entrées d'air</label><select data-building="airInlets"><option></option><option>Suffisantes</option><option>Partiellement suffisantes</option><option>Insuffisantes</option><option>Obstruées</option></select></div><div class="field"><label>Sorties d'air / faîtage</label><select data-building="airOutlets"><option></option><option>Suffisantes</option><option>Partiellement suffisantes</option><option>Insuffisantes</option><option>Absentes</option></select></div>
-<div class="field"><label>Courants d'air ressentis</label><select data-building="drafts"><option></option><option>Non</option><option>Faibles</option><option>Modérés</option><option>Importants</option></select></div><div class="field"><label>Condensation</label><select data-building="condensation"><option></option><option>Absente</option><option>Faible</option><option>Importante</option></select></div><div class="field"><label>Odeur d'ammoniac</label><select data-building="ammonia"><option></option><option>Absente</option><option>Faible</option><option>Marquée</option></select></div>
-<div class="field"><label>Luminosité</label><select data-building="lighting"><option></option><option>Bonne</option><option>Moyenne</option><option>Insuffisante</option><option>Éblouissante par zones</option></select></div><div class="field"><label>Température bâtiment (°C)</label><input data-building="indoorTemp" type="number" inputmode="decimal"></div><div class="field"><label>Humidité relative (%)</label><input data-building="humidity" type="number" inputmode="decimal"></div>
-<div class="field full"><label>Observations structure / ambiance</label><textarea data-building="structureNotes"></textarea></div></div>
-<div class="actions no-print"><button class="btn save-building">Enregistrer le bâtiment</button></div></div>
+        <section class="card">
+          <h2>Vos mesures</h2>
+          <div class="table-wrap"><table class="measure-table"><thead><tr><th>Paramètre</th><th>État</th><th>Interprétation rapide</th></tr></thead><tbody id="measureSummary"></tbody></table></div>
+        </section>
 
-<div id="building-water" class="card building-pane hidden"><h3 class="title">Abreuvoirs et mesures électriques</h3><div class="help">Renseignez une ligne par type ou zone d'abreuvement. Pour les mesures électriques, indiquez l'unité réellement affichée par votre appareil (V, mV, µA ou mA).</div>
-<div id="waterPoints"></div><div class="actions no-print"><button class="btn secondary" id="addWaterPoint">Ajouter un type d'abreuvoir</button></div>
-<h3 class="subtitle">Mesures de courant / tension parasite</h3><div id="electricMeasures"></div><div class="actions no-print"><button class="btn secondary" id="addElectricMeasure">Ajouter une mesure</button></div>
-<div class="grid" style="margin-top:12px"><div class="field"><label>Débit disponible global (L/min, si mesuré)</label><input data-building="globalFlow" type="number" inputmode="decimal"></div><div class="field"><label>Nombre total de points d'eau</label><input id="totalWaterPoints" readonly></div><div class="field full"><label>Observations abreuvement / électricité</label><textarea data-building="waterNotes"></textarea></div></div>
-<div class="actions no-print"><button class="btn save-building">Enregistrer les données</button></div></div>
+        <section class="card">
+          <h2>Hypothèses principales</h2>
+          <div id="hypotheses"></div>
+        </section>
 
-<div id="building-questionnaire" class="card building-pane hidden"><h3 class="title">Questionnaire environnement et bien-être</h3><div class="muted" style="margin-bottom:12px">Questions reprises et structurées pour alimenter la partie physique, environnement et bien-être du bilan.</div><div id="buildingQuestions" class="question-grid"></div>
-<div class="field full" style="margin-top:12px"><label>Autres observations / priorités relevées</label><textarea data-building="questionnaireNotes"></textarea></div><div class="actions no-print"><button class="btn save-building">Enregistrer le questionnaire</button></div></div>
+        <section class="card">
+          <h2>Lecture 5M Vet</h2>
+          <div id="fiveM"></div>
+        </section>
 
-<div class="card"><h3 class="title">Synthèse bâtiment</h3><div id="buildingSummary" class="building-summary"></div></div>
-</section>
+        <section class="card">
+          <h2>Contrôles complémentaires suggérés</h2>
+          <div id="checks"></div>
+        </section>
 
-<section id="photos" class="tabpage hidden"><div class="card no-print"><h2 class="title">Ajouter des photos</h2><div class="grid3"><div class="field"><label>Famille</label><select id="photoFamily"></select></div><div class="field"><label>N° animal (facultatif)</label><input id="photoAnimal"></div><div class="field"><label>Zone / sujet</label><select id="photoSubject"><option>Bouse</option><option>Urine / bandelette</option><option>Poils</option><option>Membres / onglons</option><option>Animal</option><option>Mamelle</option><option>Logement</option><option>Plan du bâtiment</option><option>Ventilation / ouvertures</option><option>Équipement électrique</option><option>Auge / ration</option><option>Eau / abreuvoir</option><option>Fourrage</option><option>Autre</option></select></div><div class="field full"><label>Commentaire</label><input id="photoComment"></div><div class="field full"><label>Prendre ou choisir une photo</label><input id="photoInput" type="file" accept="image/*" capture="environment" multiple><small>Les photos restent enregistrées sur cet appareil.</small></div></div><div class="actions"><button class="btn" id="addPhotos">Ajouter les photos</button></div></div><div class="card"><div id="photoGallery" class="photo-grid"></div></div></section>
+        <section class="card">
+          <h2>Plan d'action terrain</h2>
+          <div id="actionsPlan"></div>
+        </section>
 
-<section id="export" class="tabpage hidden"><div class="card"><h2 class="title">Exports</h2><p class="muted">Les exports regroupent automatiquement les saisies ayant le même animal, la même catégorie et la même date.</p><div class="actions"><button class="btn" id="exportCsv">Exporter mesures CSV</button><button class="btn" id="exportBuildingCsv">Exporter bâtiment CSV</button><button class="btn" id="exportXls">Exporter tableau Excel</button><button class="btn secondary" id="exportJson">Sauvegarde complète JSON</button><label class="btn secondary">Restaurer JSON<input id="importJson" type="file" accept="application/json" hidden></label><button class="btn secondary" onclick="print()">Imprimer / PDF</button><button class="btn danger" id="clearAll">Effacer toutes les données</button></div></div><div class="card"><h2 class="title">Compatibilité</h2><div class="help">Le CSV et le tableau Excel utilisent les intitulés du classeur d'analyse bovin. Les observations multiples sont séparées par « | ». La sauvegarde JSON contient aussi les photos.</div></div></section>
-</div>
+        <section class="card warning">
+          <strong>Important</strong>
+          <p>Cette application fournit une orientation à partir de tendances déclarées. Elle ne pose pas de diagnostic et ne remplace ni l'examen clinique, ni l'analyse de la ration, ni l'avis du vétérinaire ou du conseiller.</p>
+        </section>
 
-<div id="multiModal" class="modal hidden"><div class="modal-panel"><div class="modal-head"><h3 id="multiTitle">Choix multiples</h3><button class="close" id="closeMulti">×</button></div><div id="multiChoices" class="chips"></div><div class="actions"><button class="btn" id="validateMulti">Valider</button></div></div></div>
-<script>
-const FAMILIES={
- urines:{label:'Urines',icon:'🟡',fields:[['pH urinaire','number'],['Redox urinaire','number'],['Brix urine','number'],['Densité urinaire','number'],['Cétones urinaires','choice',['Négatif','Traces','+','++','+++']],['Glucose urinaire','choice',['Négatif','Traces','+','++','+++']],['Protéines urinaires','choice',['Négatif','Traces','+','++','+++']],['Observation urine','text']]},
- sang:{label:'Sang',icon:'🔴',fields:[['Glycémie','number'],['BOH sanguin','number'],['Urémie','number'],['pH sanguin','number'],['Calcium sanguin','number'],['Phosphore sanguin','number'],['Magnésium sanguin','number'],['Protéines totales','number'],['Observation sang','text']]},
- bouses:{label:'Bouses',icon:'🟤',fields:[['Bouses','multi',['Dures','Avec mucus','Collantes','Liquides','Moulées','Molles']],['Couleur bouses','multi',['Brunes','Vertes','Jaunes','Noires','Grises','Rouges / sang']],['Digestibilité bouses','multi',['Fibres longues','Fibres courtes','Grains','Bulles','Odeur forte','Parasites visibles']],['pH bouses','number'],['Redox bouses','number'],['Observation bouses','text']]},
- clinique:{label:'Observations physiques',icon:'🟢',fields:[['NEC','number'],['Muscles','choice',['--','-','0','+','++']],['Poils','multi',['Fins','Soyeux','Piqués','Hirsutes','Pelucheux','Mue','Ternes']],['Membres','multi',['Blessures','Cagneux','Panard','Coudés','Boiterie','Enflammé']],['Score locomotion','choice',['1','2','3']],['SRR','text'],['Cardiaque','text'],['Respiratoire','text'],['Nombril','text'],['Thyroïde / larynx','text'],['Température','number'],['Observation physique','text']]},
- lait:{label:'Lait',icon:'🔵',fields:[['pH lait','number'],['Brix lait','number'],['Densité lait','number'],['Observation lait','text']]},
- colostrum:{label:'Colostrum',icon:'🟣',fields:[['Brix colostrum','number'],['Densité colostrum','number'],['pH colostrum','number'],['Qualité / observation','text']]},
- batiment:{label:'Bâtiment',icon:'🏠',fields:[]},
- eau:{label:'Eau',icon:'💧',fields:[['Électricité / résistivité','number'],['Dureté','number'],['Chloration','number'],['Conductivité','number'],['TDS','number'],['Salinité','number'],['pH eau','number'],['Redox eau','number'],['Point de prélèvement','text'],['Observation eau','text']]}
-};
-const CATEGORIES=['Fraîches vêlées – 0 à 21 jours','Pic de lactation – 20 à 120 jours','Milieu de lactation','Fin de lactation','Taries – 2 mois avant mise bas ou au sevrage','Préparation vêlage – 3 semaines à 1 mois avant mise bas','Veau de 0 à 15 jours','Veau de 15 à 60 jours','Autre'];
-const VEAL_ONLY_FIELDS=new Set(['Cardiaque','Respiratoire','Nombril','Thyroïde / larynx']);
-function isVealCategory(category){return String(category||'').toLowerCase().startsWith('veau')}
-function familyFieldsFor(category){const fields=FAMILIES[currentFamily].fields||[];return currentFamily==='clinique'&&!isVealCategory(category)?fields.filter(f=>!VEAL_ONLY_FIELDS.has(f[0])):fields}
-const PHOTO_SUBJECTS=['Bouse','Urine / bandelette','Poils','Membres / onglons','Animal','Mamelle','Logement','Auge / ration','Eau / abreuvoir','Fourrage','Autre'];
-let state=JSON.parse(localStorage.getItem('gdsSaisieV3')||'null')||{visit:{},records:[],photos:[]};let currentFamily='clinique',currentMode='individual',editingId=null,multiContext=null;
-function ensureBuilding(){
- if(!state||typeof state!=='object')state={visit:{},records:[],photos:[]};
- if(!state.visit)state.visit={};
- if(!Array.isArray(state.records))state.records=[];
- if(!Array.isArray(state.photos))state.photos=[];
- if(!state.building||typeof state.building!=='object')state.building={};
- if(!Array.isArray(state.building.waterPoints))state.building.waterPoints=[];
- if(!Array.isArray(state.building.electricMeasures))state.building.electricMeasures=[];
- if(!state.building.questionnaire||typeof state.building.questionnaire!=='object')state.building.questionnaire={};
-}
+        <div class="actions">
+          <button id="saveBtn" class="primary" type="button">Enregistrer cette visite</button>
+          <button id="printBtn" class="secondary" type="button">Imprimer / PDF</button>
+        </div>
+      </section>
+    </section>
 
-const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];const today=()=>new Date().toISOString().slice(0,10);const uid=()=>crypto.randomUUID?crypto.randomUUID():Date.now()+'_'+Math.random();
-function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function persist(){localStorage.setItem('gdsSaisieV3',JSON.stringify(state));renderDashboard();renderRecords();renderPhotos()}
-function init(){ensureBuilding();
- $('#visitDate').value=today();$('#measureDate').value=today();$('#gridDate').value=today();
- CATEGORIES.forEach(x=>{$('#category').add(new Option(x,x));$('#gridCategory').add(new Option(x,x))});
- Object.entries(FAMILIES).forEach(([k,f])=>{const b=document.createElement('button');b.type='button';b.className='family'+(k===currentFamily?' active':'');b.dataset.family=k;b.innerHTML=`<strong>${f.icon}</strong>${f.label}`;$('#familyButtons').appendChild(b);$('#filterFamily').add(new Option(f.label,k));$('#photoFamily').add(new Option(f.label,k));});
- loadVisit();bind();selectFamily(currentFamily);setMode('individual');renderDashboard();renderRecords();renderPhotos();if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
-}
-function bind(){
- $$('nav button').forEach(b=>b.onclick=()=>showTab(b.dataset.tab));$$('.mode').forEach(b=>b.onclick=()=>setMode(b.dataset.mode));$('#familyButtons').onclick=e=>{const b=e.target.closest('.family');if(b)selectFamily(b.dataset.family)};
- $('#saveVisit').onclick=saveVisit;$('#category').onchange=renderIndividualFields;$('#gridCategory').onchange=()=>renderGrid(true);$('#individualForm').onsubmit=e=>{e.preventDefault();saveIndividual(false)};$('#saveNext').onclick=()=>saveIndividual(true);$('#resetIndividual').onclick=()=>resetIndividual(false);
- $('#addRows').onclick=()=>addGridRows(+$ ('#rowsToAdd').value||5);$('#applyCommon').onclick=applyCommon;$('#saveGrid').onclick=saveGrid;$('#clearGrid').onclick=()=>{if(confirm('Vider la grille en cours ?'))renderGrid(true)};
- $('#filterFamily').onchange=renderRecords;$('#filterAnimal').oninput=renderRecords;$('#photoInput').onchange=()=>{};$('#addPhotos').onclick=addPhotos;
- $('#exportCsv').onclick=exportCsv;$('#exportXls').onclick=exportXls;$('#exportJson').onclick=exportJson;$('#importJson').onchange=e=>e.target.files[0]&&importJson(e.target.files[0]);$('#clearAll').onclick=clearAll;
- $('#closeMulti').onclick=closeMulti;$('#validateMulti').onclick=validateMulti;$('#multiModal').onclick=e=>{if(e.target.id==='multiModal')closeMulti()};
-}
-function showTab(id){const page=$('#'+id);if(!page)return;$$('.tabpage').forEach(x=>x.classList.add('hidden'));page.classList.remove('hidden');$$('nav button').forEach(x=>x.classList.toggle('active',x.dataset.tab===id));window.scrollTo(0,0)}
-function saveVisit(){state.visit={farm:$('#farm').value,farmer:$('#farmer').value,town:$('#town').value,date:$('#visitDate').value,observer:$('#observer').value,species:$('#species').value,type:$('#visitType').value,planned:$('#planned').value,mainLot:$('#mainLot').value};persist();alert('Visite enregistrée sur cet appareil.')}
-function loadVisit(){const v=state.visit||{};const map={farm:'farm',farmer:'farmer',town:'town',date:'visitDate',observer:'observer',species:'species',type:'visitType',planned:'planned',mainLot:'mainLot'};Object.entries(map).forEach(([k,id])=>{if(v[k]!=null)$('#'+id).value=v[k]})}
-function setMode(m){currentMode=m;$$('.mode').forEach(x=>x.classList.toggle('active',x.dataset.mode===m));$('#individualPanel').classList.toggle('hidden',m!=='individual');$('#gridPanel').classList.toggle('hidden',m==='individual');if(m!=='individual')renderGrid(true)}
-function selectFamily(k){currentFamily=k;$$('.family').forEach(x=>x.classList.toggle('active',x.dataset.family===k));renderBanner();renderIndividualFields();if(currentMode!=='individual')renderGrid(true);$('#photoFamily').value=k}
-function bannerHtml(id){const f=FAMILIES[currentFamily];return `<div class="family-banner ${currentFamily}">${f.icon} ${f.label}</div>`}function renderBanner(){$('#familyBanner').innerHTML=bannerHtml();$('#gridFamilyBanner').innerHTML=bannerHtml()}
-function renderPhysiology(){return `<div class="subtitle">Stade physiologique</div><div class="choice-box"><div class="chips" id="stageChips">${['Pleine','Synchro chaleur','Vide','Lactation'].map(x=>`<label class="chip"><input type="radio" name="stage" value="${x}">${x}</label>`).join('')}</div><div id="gestationBox" class="grid hidden" style="margin-top:10px"><div class="field"><label>Nombre de mois de gestation</label><select id="gestationMonths"><option value=""></option>${[1,2,3,4,5,6,7,8,9].map(x=>`<option>${x}</option>`).join('')}</select></div></div><div id="lactationBox" class="grid hidden" style="margin-top:10px"><div class="field"><label>Jours en lactation (facultatif)</label><input id="lactationDays" type="number" min="0" inputmode="numeric"></div></div></div>`}
-function renderIndividualFields(){
- $('#physiology').innerHTML=renderPhysiology();bindChipGroups($('#physiology'));$$('input[name="stage"]').forEach(r=>r.onchange=()=>{$('#gestationBox').classList.toggle('hidden',r.value!=='Pleine'||!r.checked);$('#lactationBox').classList.toggle('hidden',r.value!=='Lactation'||!r.checked)});
- $('#individualFields').innerHTML='<div class="subtitle">Mesures et observations</div><div class="grid">'+familyFieldsFor($('#category').value).map(f=>fieldHtml(f)).join('')+'</div>';bindChipGroups($('#individualFields'));
-}
-function fieldHtml([name,type,opts]){const id='f_'+slug(name);if(type==='number')return `<div class="field"><label>${name}</label><input id="${id}" data-field="${esc(name)}" inputmode="decimal" type="text"></div>`;if(type==='text')return `<div class="field"><label>${name}</label><input id="${id}" data-field="${esc(name)}"></div>`;if(type==='choice')return `<div class="choice-box"><label class="head">${name}</label><div class="chips">${opts.map(x=>`<label class="chip"><input type="radio" name="${id}" data-field="${esc(name)}" value="${esc(x)}">${esc(x)}</label>`).join('')}</div></div>`;return `<div class="choice-box"><label class="head">${name} <span class="muted">(plusieurs choix)</span></label><div class="chips">${opts.map(x=>`<label class="chip"><input type="checkbox" data-field="${esc(name)}" value="${esc(x)}">${esc(x)}</label>`).join('')}</div></div>`}
-function slug(s){return s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-zA-Z0-9]+/g,'_').replace(/^_|_$/g,'').toLowerCase()}
-function bindChipGroups(root){root.querySelectorAll('.chip input').forEach(i=>i.onchange=()=>{if(i.type==='radio')root.querySelectorAll(`input[name="${CSS.escape(i.name)}"]`).forEach(x=>x.closest('.chip').classList.toggle('selected',x.checked));else i.closest('.chip').classList.toggle('selected',i.checked)})}
-function collectIndividual(){const measures={};familyFieldsFor($('#category').value).forEach(([name,type])=>{const els=$$(`[data-field="${CSS.escape(name)}"]`);if(type==='multi'){const vals=els.filter(x=>x.checked).map(x=>x.value);if(vals.length)measures[name]=vals}else if(type==='choice'){const x=els.find(x=>x.checked);if(x)measures[name]=x.value}else{const x=els[0];if(x&&x.value.trim())measures[name]=x.value.trim()}});const stage=$('input[name="stage"]:checked')?.value||'';return{id:editingId||uid(),createdAt:new Date().toISOString(),family:currentFamily,familyLabel:FAMILIES[currentFamily].label,animalId:$('#animalId').value.trim(),category:$('#category').value,lot:$('#lot').value.trim(),date:$('#measureDate').value,age:$('#age').value.trim(),rank:$('#rank').value.trim(),stage,gestationMonths:stage==='Pleine'?$('#gestationMonths').value:'',lactationDays:stage==='Lactation'?$('#lactationDays').value:'',notes:$('#notes').value.trim(),measures}}
-function saveIndividual(next){const r=collectIndividual();if(!r.animalId&& !['eau','lait','colostrum'].includes(currentFamily)){alert('Veuillez renseigner le numéro ou repère de l’animal.');return}const ix=state.records.findIndex(x=>x.id===r.id);if(ix>=0)state.records[ix]=r;else state.records.push(r);editingId=null;persist();resetIndividual(next);if(!next)showTab('donnees')}
-function resetIndividual(keep){const cat=$('#category').value,lot=$('#lot').value,date=$('#measureDate').value;$('#individualForm').reset();renderIndividualFields();$('#measureDate').value=keep?date:today();if(keep){$('#category').value=cat;$('#lot').value=lot}editingId=null;if(keep)$('#animalId').focus()}
-function renderGrid(clear=false){renderBanner();const fields=familyFieldsFor($('#gridCategory').value);$('#gridHead').innerHTML='<tr><th>Animal / repère</th><th>Catégorie</th><th>Lot</th><th>Date</th><th>Stade</th><th>Mois / JEL</th>'+fields.map(f=>`<th>${esc(f[0])}</th>`).join('')+'<th></th></tr>';$('#gridBody').innerHTML='';addGridRows(5)}
-function addGridRows(n){for(let i=0;i<n;i++){const tr=document.createElement('tr');tr.innerHTML=`<td><input class="animal" data-col="animalId"></td><td><select data-col="category">${CATEGORIES.map(x=>`<option>${esc(x)}</option>`).join('')}</select></td><td><input data-col="lot"></td><td><input data-col="date" type="date" value="${$('#gridDate').value||today()}"></td><td><select data-col="stage"><option></option><option>Pleine</option><option>Synchro chaleur</option><option>Vide</option><option>Lactation</option></select></td><td><input data-col="stageDetail" placeholder="mois ou JEL"></td>${familyFieldsFor($('#gridCategory').value).map(f=>gridCellHtml(f)).join('')}<td class="row-tools"><button class="btn small secondary" type="button" onclick="this.closest('tr').remove()">✕</button></td>`;$('#gridBody').appendChild(tr)}applyCommon()}
-function gridCellHtml([name,type,opts]){if(type==='multi')return `<td><button type="button" class="multi-btn" data-field="${esc(name)}" data-options="${esc(opts.join('§'))}" onclick="openMulti(this)">Choisir…</button><input type="hidden" data-value-field="${esc(name)}"></td>`;if(type==='choice')return `<td><select data-value-field="${esc(name)}"><option></option>${opts.map(x=>`<option>${esc(x)}</option>`).join('')}</select></td>`;return `<td><input data-value-field="${esc(name)}" ${type==='number'?'inputmode="decimal"':''}></td>`}
-function applyCommon(){$$('#gridBody tr').forEach(tr=>{tr.querySelector('[data-col="category"]').value=$('#gridCategory').value;tr.querySelector('[data-col="date"]').value=$('#gridDate').value||today();tr.querySelector('[data-col="lot"]').value=$('#gridLot').value})}
-function openMulti(btn){multiContext=btn;$('#multiTitle').textContent=btn.dataset.field+' — plusieurs choix';const selected=(btn.nextElementSibling.value||'').split('|').filter(Boolean);$('#multiChoices').innerHTML=btn.dataset.options.split('§').map(x=>`<label class="chip ${selected.includes(x)?'selected':''}"><input type="checkbox" value="${esc(x)}" ${selected.includes(x)?'checked':''}>${esc(x)}</label>`).join('');bindChipGroups($('#multiChoices'));$('#multiModal').classList.remove('hidden')}
-function closeMulti(){$('#multiModal').classList.add('hidden');multiContext=null}function validateMulti(){if(!multiContext)return;const vals=$$('#multiChoices input:checked').map(x=>x.value);multiContext.nextElementSibling.value=vals.join('|');multiContext.textContent=vals.length?vals.join(', '):'Choisir…';closeMulti()}
-function saveGrid(){let added=0;$$('#gridBody tr').forEach(tr=>{const animalId=tr.querySelector('[data-col="animalId"]').value.trim();const measures={};tr.querySelectorAll('[data-value-field]').forEach(x=>{if(x.value.trim())measures[x.dataset.valueField]=x.dataset.valueField&&x.type==='hidden'?x.value.split('|'):x.value.trim()});if(!animalId&&!Object.keys(measures).length)return;state.records.push({id:uid(),createdAt:new Date().toISOString(),family:currentFamily,familyLabel:FAMILIES[currentFamily].label,animalId,category:tr.querySelector('[data-col="category"]').value,lot:tr.querySelector('[data-col="lot"]').value.trim(),date:tr.querySelector('[data-col="date"]').value,stage:tr.querySelector('[data-col="stage"]').value,gestationMonths:tr.querySelector('[data-col="stage"]').value==='Pleine'?tr.querySelector('[data-col="stageDetail"]').value:'',lactationDays:tr.querySelector('[data-col="stage"]').value==='Lactation'?tr.querySelector('[data-col="stageDetail"]').value:'',age:'',rank:'',notes:'',measures});added++});if(!added){alert('Aucune ligne renseignée.');return}persist();renderGrid(true);alert(added+' ligne(s) enregistrée(s).')}
-function renderRecords(){const fam=$('#filterFamily')?.value||'',q=($('#filterAnimal')?.value||'').toLowerCase();const list=state.records.filter(r=>(!fam||r.family===fam)&&(!q||(r.animalId||'').toLowerCase().includes(q))).slice().reverse();$('#recordCountTab').textContent=`(${state.records.length})`;$('#records').innerHTML=list.length?list.map(r=>`<div class="record"><div><strong>${esc(r.animalId||r.familyLabel)}</strong><small>${esc(r.category||'')} · ${esc(r.date||'')} · ${esc(r.lot||'Sans lot')}</small><span class="tag">${FAMILIES[r.family]?.icon||''} ${esc(r.familyLabel)}</span><span class="tag">${Object.keys(r.measures||{}).length} donnée(s)</span>${r.stage?`<span class="tag">${esc(r.stage)} ${esc(r.gestationMonths||r.lactationDays||'')}</span>`:''}</div><div class="no-print"><button class="btn small secondary" onclick="editRecord('${r.id}')">Modifier</button> <button class="btn small danger" onclick="deleteRecord('${r.id}')">✕</button></div></div>`).join(''):'<div class="empty">Aucune donnée enregistrée.</div>'}
-function editRecord(id){const r=state.records.find(x=>x.id===id);if(!r)return;currentFamily=r.family;selectFamily(r.family);setMode('individual');editingId=id;$('#animalId').value=r.animalId||'';$('#category').value=r.category||CATEGORIES[0];renderIndividualFields();$('#lot').value=r.lot||'';$('#measureDate').value=r.date||today();$('#age').value=r.age||'';$('#rank').value=r.rank||'';$('#notes').value=r.notes||'';if(r.stage){const s=$(`input[name="stage"][value="${CSS.escape(r.stage)}"]`);if(s){s.checked=true;s.dispatchEvent(new Event('change'))}}if($('#gestationMonths'))$('#gestationMonths').value=r.gestationMonths||'';if($('#lactationDays'))$('#lactationDays').value=r.lactationDays||'';Object.entries(r.measures||{}).forEach(([name,val])=>{const els=$$(`[data-field="${CSS.escape(name)}"]`);if(Array.isArray(val))els.forEach(x=>{x.checked=val.includes(x.value);x.closest('.chip')?.classList.toggle('selected',x.checked)});else{const radio=els.find(x=>x.type==='radio'&&x.value===val);if(radio){radio.checked=true;radio.closest('.chip').classList.add('selected')}else if(els[0])els[0].value=val}});showTab('saisie')}
-function deleteRecord(id){if(confirm('Supprimer cette saisie ?')){state.records=state.records.filter(x=>x.id!==id);persist()}}
-async function addPhotos(){const files=[...$('#photoInput').files];if(!files.length){alert('Choisissez au moins une photo.');return}for(const file of files){const data=await resizeImage(file,1280,.78);state.photos.push({id:uid(),createdAt:new Date().toISOString(),family:$('#photoFamily').value,animalId:$('#photoAnimal').value.trim(),subject:$('#photoSubject').value,comment:$('#photoComment').value.trim(),data})}$('#photoInput').value='';$('#photoComment').value='';persist();alert(files.length+' photo(s) ajoutée(s).')}
-function resizeImage(file,max,quality){return new Promise((res,rej)=>{const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{let w=img.width,h=img.height;if(Math.max(w,h)>max){const k=max/Math.max(w,h);w=Math.round(w*k);h=Math.round(h*k)}const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);res(c.toDataURL('image/jpeg',quality))};img.onerror=rej;img.src=rd.result};rd.onerror=rej;rd.readAsDataURL(file)})}
-function renderPhotos(){$('#photoCountTab').textContent=`(${state.photos.length})`;$('#photoGallery').innerHTML=state.photos.length?state.photos.slice().reverse().map(p=>`<div class="photo"><img src="${p.data}" alt="Photo"><div class="meta"><strong>${esc(p.subject)}</strong>${esc(p.animalId||'Visite générale')} · ${FAMILIES[p.family]?.label||''}<br>${esc(p.comment||'')}<div class="actions no-print"><button class="btn small danger" onclick="deletePhoto('${p.id}')">Supprimer</button></div></div></div>`).join(''):'<div class="empty full">Aucune photo enregistrée.</div>'}
-function deletePhoto(id){if(confirm('Supprimer cette photo ?')){state.photos=state.photos.filter(x=>x.id!==id);persist()}}
-function renderDashboard(){const animals=new Set(state.records.map(r=>r.animalId).filter(Boolean));const planned=+state.visit.planned||0;const prog=planned?Math.min(100,Math.round(animals.size/planned*100)):0;$('#kpiRecords').textContent=state.records.length;$('#kpiAnimals').textContent=animals.size;$('#kpiPhotos').textContent=state.photos.length;$('#kpiProgress').textContent=prog+' %';$('#familyProgress').innerHTML=Object.entries(FAMILIES).map(([k,f])=>{const n=state.records.filter(r=>r.family===k).length;const pct=state.records.length?Math.round(n/state.records.length*100):0;return `<div style="margin-bottom:11px"><div style="display:flex;justify-content:space-between;font-size:12px;font-weight:750;margin-bottom:4px"><span>${f.icon} ${f.label}</span><span>${n}</span></div><div class="progress"><i style="width:${pct}%"></i></div></div>`}).join('')}
-function mergedRows(){const map=new Map();state.records.forEach(r=>{const key=[r.animalId||r.family,r.category,r.date].join('§');if(!map.has(key))map.set(key,{'Exploitation':state.visit.farm||'','Éleveur':state.visit.farmer||'','Commune':state.visit.town||'','Date visite':state.visit.date||'','Espèce':state.visit.species||'','N° travail':r.animalId||'','Catégorie':r.category||'','Lot':r.lot||'','Date mesure':r.date||'','Âge':r.age||'','Rang':r.rank||'','Stade physiologique':r.stage||'','Mois de gestation':r.gestationMonths||'','Jours en lactation':r.lactationDays||'','Observations':''});const o=map.get(key);Object.entries(r.measures||{}).forEach(([k,v])=>o[k]=Array.isArray(v)?v.join(' | '):v);if(r.notes)o['Observations']=[o['Observations'],r.notes].filter(Boolean).join(' | ')});return [...map.values()]}
-function csvCell(v){return '"'+String(v??'').replace(/"/g,'""')+'"'}function dateTag(){return today()}function download(name,type,content){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-function exportCsv(){const rows=mergedRows(),headers=[...new Set(rows.flatMap(Object.keys))];const csv='\ufeff'+[headers.map(csvCell).join(';'),...rows.map(r=>headers.map(h=>csvCell(r[h]||'')).join(';'))].join('\r\n');download('mesures_ferme_'+dateTag()+'.csv','text/csv;charset=utf-8',csv)}
-function exportXls(){const rows=mergedRows(),headers=[...new Set(rows.flatMap(Object.keys))];const html=`<html><head><meta charset="utf-8"></head><body><table border="1"><tr>${headers.map(h=>`<th>${esc(h)}</th>`).join('')}</tr>${rows.map(r=>`<tr>${headers.map(h=>`<td>${esc(r[h]||'')}</td>`).join('')}</tr>`).join('')}</table></body></html>`;download('mesures_ferme_'+dateTag()+'.xls','application/vnd.ms-excel',html)}
-function exportJson(){download('sauvegarde_assistant_gds_v4_1_'+dateTag()+'.json','application/json',JSON.stringify(state,null,2))}function importJson(file){const rd=new FileReader();rd.onload=()=>{try{const x=JSON.parse(rd.result);if(!x.records||!x.photos)throw 0;if(confirm('Remplacer les données actuelles par cette sauvegarde ?')){state=x;persist();loadVisit();alert('Sauvegarde restaurée.')}}catch(e){alert('Fichier de sauvegarde non reconnu.')}};rd.readAsText(file)}
-function clearAll(){if(confirm('Supprimer définitivement toutes les saisies et photos de cet appareil ?')){state={visit:{},records:[],photos:[],building:{waterPoints:[],electricMeasures:[],questionnaire:{}}};persist();location.reload()}}
+    <section id="screen-history" class="screen">
+      <section class="card">
+        <div class="section-head">
+          <div>
+            <h2>Historique des visites</h2>
+            <p class="muted">Les données sont conservées uniquement sur cet appareil.</p>
+          </div>
+          <button id="clearHistoryBtn" class="danger ghost" type="button">Tout supprimer</button>
+        </div>
+        <div id="historyList" class="history-list"></div>
+      </section>
+    </section>
 
-const BUILDING_QUESTIONS=[
- ['Accès à l’eau','waterAccess',['Bon pour tous les animaux','Concurrence possible','Accès difficile','Points insuffisants']],
- ['Propreté des abreuvoirs','waterClean',['Propres','Légèrement sales','Sales','Algues / biofilm','Bouses / litière']],
- ['Débit et renouvellement','waterFlowAssessment',['Satisfaisant','Variable','Insuffisant','Non mesuré']],
- ['Disponibilité de l’alimentation','feedAccess',['Suffisante','Concurrence','Places insuffisantes','Tri de ration visible']],
- ['Propreté des auges','troughClean',['Propres','Résidus anciens','Souillées','Moisissures visibles']],
- ['Couchage','bedding',['Propre et sec','Humide','Souillé','Dur','Glissant','Manque de place']],
- ['Confort des logettes','cubicles',['Adaptées','Trop courtes','Trop étroites','Mal réglées','Blessantes','Non concerné']],
- ['Circulation des animaux','traffic',['Fluide','Passages étroits','Angles dangereux','Sols glissants','Culs-de-sac']],
- ['État des sols','floors',['Bon','Usé','Glissant','Irrégulier','Abrasif','Accumulation de lisier']],
- ['Ventilation ressentie','ventilationAssessment',['Bonne','Hétérogène','Air stagnant','Courants d’air','Chaleur excessive','Humidité élevée']],
- ['Densité animale','stocking',['Adaptée','Élevée','Très élevée','Variable selon les zones']],
- ['Propreté des animaux','animalCleanliness',['Bonne','Moyenne','Animaux sales','Mamelles sales','Membres sales']],
- ['Comportement / calme','behaviour',['Calmes','Agités','Peur de l’humain','Bousculades','Léchage / stéréotypies']],
- ['Blessures observées','injuries',['Aucune notable','Jarrets','Genoux','Dos','Cou / cornadis','Mamelles','Queue']],
- ['Isolement des malades','sickPen',['Zone adaptée','Zone insuffisante','Pas de zone dédiée','Non vérifié']],
- ['Gestion des vêlages','calving',['Case propre dédiée','Case partagée','Hygiène insuffisante','Surveillance difficile','Non concerné']],
- ['Gestion des veaux','calfArea',['Zone propre et sèche','Ventilation adaptée','Courants d’air','Humidité','Mélange des âges','Non concerné']],
- ['Nuisibles et biosécurité','biosecurity',['Maîtrisés','Rongeurs','Oiseaux','Chiens / chats','Circulation visiteurs','Pédiluve absent']],
- ['Stockage aliments / fourrages','feedStorage',['Protégé','Humidité','Moisissures','Accès nuisibles','Mélanges / erreurs possibles']],
- ['Entretien du matériel','equipment',['Satisfaisant','Entretien irrégulier','Éléments coupants','Électricité / mise à la terre à vérifier']]
-];
-let planCtx=null,planDrawing=false,planColor='#1f2937',planErase=false;
-function initBuilding(){
- ensureBuilding();
- $$('[data-building-pane]').forEach(b=>b.onclick=()=>showBuildingPane(b.dataset.buildingPane));
- $$('[data-building]').forEach(el=>{el.value=state.building[el.dataset.building]||'';el.addEventListener('change',saveBuildingFields)});
- $$('.save-building').forEach(b=>b.onclick=()=>{saveBuildingFields();persist();renderBuildingSummary();alert('Données bâtiment enregistrées.')});
- $('#buildingOrientation').value=state.building.orientation||'';$('#planLegend').value=state.building.planLegend||'';
- $('#buildingOrientation').onchange=saveBuildingPlanData;$('#planLegend').onchange=saveBuildingPlanData;
- renderBuildingQuestions();renderWaterPoints();renderElectricMeasures();setupPlan();renderBuildingSummary();
- $('#addWaterPoint').onclick=()=>{state.building.waterPoints.push({id:uid(),type:'',number:1,capacity:'',flow:'',location:'',cleanliness:'',access:''});renderWaterPoints();persist()};
- $('#addElectricMeasure').onclick=()=>{state.building.electricMeasures.push({id:uid(),equipment:'',value:'',unit:'mV',location:'',conditions:''});renderElectricMeasures();persist()};
- $('#saveBuildingPlan').onclick=()=>{saveBuildingPlanData();saveCanvas();persist();renderBuildingSummary();alert('Plan enregistré.')};
- $('#planToPhoto').onclick=()=>{saveCanvas();state.photos.push({id:uid(),createdAt:new Date().toISOString(),family:'batiment',animalId:'',subject:'Plan du bâtiment',comment:$('#planLegend').value.trim(),data:state.building.planImage});persist();alert('Plan ajouté à la photothèque.')};
- $('#exportBuildingCsv').onclick=exportBuildingCsv;
-}
-function showBuildingPane(name){$$('[data-building-pane]').forEach(x=>x.classList.toggle('active',x.dataset.buildingPane===name));$$('.building-pane').forEach(x=>x.classList.toggle('hidden',x.id!=='building-'+name));if(name==='plan')setTimeout(resizePlanCanvas,50)}
-function saveBuildingFields(){$$('[data-building]').forEach(el=>state.building[el.dataset.building]=el.value);persist();renderBuildingSummary()}
-function saveBuildingPlanData(){state.building.orientation=$('#buildingOrientation').value;state.building.planLegend=$('#planLegend').value;persist()}
-function renderBuildingQuestions(){const q=state.building.questionnaire||{};$('#buildingQuestions').innerHTML=BUILDING_QUESTIONS.map(([label,key,opts])=>`<div class="question"><label>${esc(label)}</label><div class="chips">${opts.map(o=>`<label class="chip ${(q[key]||[]).includes(o)?'selected':''}"><input type="checkbox" data-bq="${esc(key)}" value="${esc(o)}" ${(q[key]||[]).includes(o)?'checked':''}>${esc(o)}</label>`).join('')}</div></div>`).join('');bindChipGroups($('#buildingQuestions'));$$('[data-bq]').forEach(x=>x.onchange=()=>{const key=x.dataset.bq;state.building.questionnaire[key]=$$(`[data-bq="${CSS.escape(key)}"]:checked`).map(y=>y.value);persist();renderBuildingSummary()})}
-function renderWaterPoints(){const a=state.building.waterPoints;$('#waterPoints').innerHTML=a.length?a.map((w,i)=>`<div class="water-card"><div class="water-card-head"><strong>Abreuvoir ${i+1}</strong><button class="btn small danger" onclick="deleteWaterPoint('${w.id}')">Supprimer</button></div><div class="water-grid"><div class="field"><label>Type</label><select onchange="updateWater('${w.id}','type',this.value)"><option></option>${['Bac collectif','Bol individuel','Abreuvoir à niveau constant','Abreuvoir basculant','Tétine / pipette','Rivière / source','Autre'].map(x=>`<option ${w.type===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Nombre</label><input type="number" min="0" value="${esc(w.number??'')}" onchange="updateWater('${w.id}','number',this.value)"></div><div class="field"><label>Capacité (L)</label><input type="number" inputmode="decimal" value="${esc(w.capacity||'')}" onchange="updateWater('${w.id}','capacity',this.value)"></div><div class="field"><label>Débit (L/min)</label><input type="number" inputmode="decimal" value="${esc(w.flow||'')}" onchange="updateWater('${w.id}','flow',this.value)"></div><div class="field"><label>Zone</label><input value="${esc(w.location||'')}" onchange="updateWater('${w.id}','location',this.value)"></div><div class="field"><label>Propreté</label><select onchange="updateWater('${w.id}','cleanliness',this.value)"><option></option>${['Propre','Moyen','Sale','Biofilm / algues'].map(x=>`<option ${w.cleanliness===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Accessibilité</label><select onchange="updateWater('${w.id}','access',this.value)"><option></option>${['Bonne','Concurrence','Difficile','Dangereuse'].map(x=>`<option ${w.access===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Observations</label><input value="${esc(w.notes||'')}" onchange="updateWater('${w.id}','notes',this.value)"></div></div></div>`).join(''):'<div class="empty">Aucun abreuvoir renseigné.</div>';updateWaterTotal()}
-function updateWater(id,key,val){const x=state.building.waterPoints.find(w=>w.id===id);if(x)x[key]=val;persist();updateWaterTotal();renderBuildingSummary()}function deleteWaterPoint(id){state.building.waterPoints=state.building.waterPoints.filter(x=>x.id!==id);renderWaterPoints();persist();renderBuildingSummary()}function updateWaterTotal(){const n=state.building.waterPoints.reduce((s,w)=>s+(+w.number||0),0);$('#totalWaterPoints').value=n}
-function renderElectricMeasures(){const a=state.building.electricMeasures;$('#electricMeasures').innerHTML=a.length?a.map((m,i)=>`<div class="electric-row"><div class="electric-grid"><div class="field"><label>Équipement / point mesuré</label><select onchange="updateElectric('${m.id}','equipment',this.value)"><option></option>${['Abreuvoir','Barrière','Cornadis','Auge métallique','Logette','Salle de traite','Robot de traite','Clôture / poteau','Autre'].map(x=>`<option ${m.equipment===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Valeur</label><input type="number" inputmode="decimal" value="${esc(m.value||'')}" onchange="updateElectric('${m.id}','value',this.value)"></div><div class="field"><label>Unité</label><select onchange="updateElectric('${m.id}','unit',this.value)">${['mV','V','µA','mA'].map(x=>`<option ${m.unit===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field full-mobile"><label>Localisation / conditions de mesure</label><input value="${esc(m.location||'')}" onchange="updateElectric('${m.id}','location',this.value)" placeholder="Ex. bac nord, sol humide"></div><button class="btn small danger" onclick="deleteElectric('${m.id}')">✕</button></div></div>`).join(''):'<div class="empty">Aucune mesure électrique renseignée.</div>'}
-function updateElectric(id,key,val){const x=state.building.electricMeasures.find(m=>m.id===id);if(x)x[key]=val;persist();renderBuildingSummary()}function deleteElectric(id){state.building.electricMeasures=state.building.electricMeasures.filter(x=>x.id!==id);renderElectricMeasures();persist();renderBuildingSummary()}
-function setupPlan(){const c=$('#buildingCanvas');planCtx=c.getContext('2d');planCtx.lineCap='round';planCtx.lineJoin='round';if(state.building.planImage){const im=new Image();im.onload=()=>planCtx.drawImage(im,0,0,c.width,c.height);im.src=state.building.planImage}const pos=e=>{const r=c.getBoundingClientRect(),t=e.touches?.[0]||e;return {x:(t.clientX-r.left)*c.width/r.width,y:(t.clientY-r.top)*c.height/r.height}};const start=e=>{e.preventDefault();planDrawing=true;const p=pos(e);planCtx.beginPath();planCtx.moveTo(p.x,p.y)};const move=e=>{if(!planDrawing)return;e.preventDefault();const p=pos(e);planCtx.strokeStyle=planErase?'#ffffff':planColor;planCtx.lineWidth=planErase?24:5;planCtx.lineTo(p.x,p.y);planCtx.stroke()};const stop=()=>{if(planDrawing){planDrawing=false;saveCanvas()}};c.onpointerdown=start;c.onpointermove=move;c.onpointerup=stop;c.onpointerleave=stop;$$('[data-plan-color]').forEach(b=>b.onclick=()=>{planColor=b.dataset.planColor;planErase=false});$('#planEraser').onclick=()=>planErase=true;$('#clearPlan').onclick=()=>{if(confirm('Effacer le plan ?')){planCtx.clearRect(0,0,c.width,c.height);saveCanvas()}}}
-function resizePlanCanvas(){}function saveCanvas(){state.building.planImage=$('#buildingCanvas').toDataURL('image/png');saveBuildingPlanData()}
-function renderBuildingSummary(){ensureBuilding();const q=Object.values(state.building.questionnaire||{}).filter(v=>Array.isArray(v)&&v.length).length;const wp=state.building.waterPoints.reduce((s,w)=>s+(+w.number||0),0);const el=state.building.electricMeasures.length;$('#buildingSummary').innerHTML=`<div class="kpi"><strong>${wp}</strong><span>points d'eau renseignés</span></div><div class="kpi"><strong>${el}</strong><span>mesures électriques</span></div><div class="kpi"><strong>${q}/${BUILDING_QUESTIONS.length}</strong><span>rubriques du questionnaire</span></div>`}
-function buildingFlat(){ensureBuilding();const b=state.building,o={'Exploitation':state.visit.farm||'','Date visite':state.visit.date||'','Orientation':b.orientation||'','Type bâtiment':b.buildingType||'','Ancienneté':b.buildingAge||'','Surface m²':b.surface||'','Animaux présents':b.animalsPresent||'','Longueur m':b.length||'','Largeur m':b.width||'','Type aération':b.ventilationType||'','Entrées d’air':b.airInlets||'','Sorties d’air':b.airOutlets||'','Courants d’air':b.drafts||'','Condensation':b.condensation||'','Ammoniac':b.ammonia||'','Luminosité':b.lighting||'','Température bâtiment':b.indoorTemp||'','Humidité %':b.humidity||'','Débit global L/min':b.globalFlow||'','Légende plan':b.planLegend||'','Observations structure':b.structureNotes||'','Observations eau/électricité':b.waterNotes||'','Observations questionnaire':b.questionnaireNotes||''};BUILDING_QUESTIONS.forEach(([label,key])=>o[label]=(b.questionnaire[key]||[]).join(' | '));o['Abreuvoirs']=b.waterPoints.map(w=>`${w.number||1} × ${w.type||'type non précisé'} (${w.location||'zone non précisée'}; débit ${w.flow||'?'} L/min; ${w.cleanliness||''}; ${w.access||''})`).join(' || ');o['Mesures électriques']=b.electricMeasures.map(m=>`${m.equipment||'Équipement'}: ${m.value||'?'} ${m.unit||''} (${m.location||''})`).join(' || ');return o}
-function exportBuildingCsv(){const o=buildingFlat(),headers=Object.keys(o);const csv='\ufeff'+headers.map(csvCell).join(';')+'\r\n'+headers.map(h=>csvCell(o[h])).join(';');download('analyse_batiment_'+dateTag()+'.csv','text/csv;charset=utf-8',csv)}
+    <section id="screen-references" class="screen">
+      <section class="card">
+        <h2>Mode d'interprétation</h2>
+        <p>L'outil croise les dix indicateurs et le contexte de terrain. Il recherche des profils concordants, des mesures discordantes et les familles 5M à explorer en priorité.</p>
+        <div class="reference-grid">
+          <article><strong>Brix urinaire</strong><span>Orientation sur la concentration des urines, à rapprocher de la densité et du contexte d'abreuvement.</span></article>
+          <article><strong>Densité urinaire</strong><span>Indicateur de concentration, à interpréter avec l'heure, la température, l'accès à l'eau et le lot.</span></article>
+          <article><strong>pH urinaire</strong><span>À rapprocher de la catégorie animale, de la ration, du statut physiologique et des objectifs alimentaires.</span></article>
+          <article><strong>Redox urinaire</strong><span>Mesure d'orientation sensible au prélèvement, au délai de lecture et aux conditions de mesure.</span></article>
+          <article><strong>pH des bouses</strong><span>À croiser avec l'aspect des bouses, les particules, la ration, le tri et les transitions alimentaires.</span></article>
+          <article><strong>Redox des bouses</strong><span>Mesure d'orientation de la dynamique digestive, à confirmer par les observations zootechniques.</span></article>
+          <article><strong>Glycémie sanguine</strong><span>Indicateur ponctuel de disponibilité énergétique. À interpréter selon l'espèce, le stade physiologique, le stress, le délai de lecture et la prise alimentaire.</span></article>
+          <article><strong>BOH sanguin</strong><span>Le β-hydroxybutyrate renseigne sur la mobilisation des réserves et le risque de déficit énergétique. Une valeur haute doit être rapprochée de la glycémie, de l'état corporel, de l'ingestion et du stade physiologique.</span></article>
+                  <article><strong>Urée sanguine</strong><span>À croiser avec l’énergie, l’azote de la ration, l’ingestion, l’hydratation et la fonction rénale.</span></article>
+          <article><strong>pH sanguin</strong><span>Indicateur central de l’équilibre acido-basique, nécessitant un prélèvement adapté et une confirmation si anormal.</span></article>
+        </div>
+      </section>
+    </section>
+  </main>
 
-const oldInit=init; init=function(){oldInit();initBuilding()};
-init();
-</script>
-</body></html>
+  <template id="historyTemplate">
+    <article class="history-item">
+      <div>
+        <strong class="h-farm"></strong>
+        <div class="muted h-meta"></div>
+        <div class="h-title"></div>
+      </div>
+      <div class="history-actions">
+        <button class="ghost h-open" type="button">Ouvrir</button>
+        <button class="ghost danger h-delete" type="button">Supprimer</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
